@@ -1,0 +1,171 @@
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<div class="padding" ng-controller="home_controller">
+
+  <super-navbar>
+    <super-navbar-title>
+      Schedule
+    </super-navbar-title>
+  </super-navbar>
+
+<!-- <h3><center>Hey {{currentUser.firstname}}! This is your schedule.</center></h3> -->
+
+<h5> Hey {{ currentUser.firstname }}, these are your tutoring hours </h5>
+<ul class = "list">
+<h4><li class = "item item-button-right" ng-repeat = "(key, card) in allRequests | filter: {tutorID : currentUser.$id, accepted:true}" ><span class="imp_date"></span>{{card.dateExp}}
+  <p>
+    <input class="checkB"type ="checkbox" ng-model="show_detail"> View Details
+  </p>
+  <div ng-show="show_detail">
+    <!-- <p> -->
+    <!-- This is user image-->
+    <div class="row">
+          <img class="col col-50"src="data:image/png;base64,{{card.userImg}}"> 
+   <!--    <p><b>Student:</b> {{card.name}}</p>
+      <p><b>Subject:</b> {{card.subject}}</p>
+      <p><b>Decription:</b> {{card.description}}</p> 
+      <p><b>Food:</b> {{card.food}}</p>
+      <p><b>Location:</b> {{card.location}}</p> -->
+
+    <div class="col col-50">
+      <div class="row">
+        <span class="col col-75"> <span class="guide_info">Student: </span> <span class="imp_info">{{card.name}}</span></span> 
+      </div>
+        <div class="row">
+            <span class="col col-75"> <span class="guide_info">Subject: </span> <span class="imp_info">{{card.subject}}</span></span> 
+          </div>
+         <div class="row">
+            <span class="col col-75"> <span class="guide_info">Decription: </span> <span class="imp_info">{{card.description}}</span></span> 
+          </div>
+      <div class="row">
+            <span class="col col-75"> <span class="guide_info">Food: </span>  <span class="imp_info">{{card.food}}</span></span> 
+          </div>
+           <div class="row">
+            <span class="col col-75"> <span class="guide_info">Location: </span>  <span class="imp_info">{{card.location}}</span></span> 
+          </div>
+    <!--   <div class="row">
+        <span class="col col-75">Food: {{card.food}}</span>
+      </div> -->
+    </div>
+    </div>
+
+    <!-- </p> -->
+    <super-navigate location="main#tutorProfile">
+      <button class ="button button-small button-balanced" ng-click="viewTutorProfile(card)">View Student Profile </button>
+    </super-navigate>
+    <!-- <super-navigate location="main#view_conversation"> -->
+      <button class ="button button-small button-calm" ng-click="sendMessage(card.userID)">Message Student</button>
+    <!-- </super-navigate> -->
+    <button class ="button button-small button-assertive" ng-click="cancelTutor(card)">Cancel Tutoring</button>
+  </div>  <!-- ng-show info-->
+</li></h4>
+</ul>
+
+<hr style="border: 2px groove #939;">
+
+
+<h5> Hey {{ currentUser.firstname }}, these are the hours you are getting tutored</h5>
+<ul class = "list">
+  <h4><li class = "item item-button-right" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true}" >
+    <span class="imp_date">{{card.dateExp}}</span>
+    <p align><input class="checkB"type ="checkbox" ng-model="show_detail">
+      View Details
+    </p>
+  <div ng-show="show_detail">
+    <!-- <p> -->
+    <!-- This is user image-->
+    <div class="row">
+          <img class="col col-50"src="data:image/png;base64,{{card.tutorImg}}"> 
+   <!--    <p><b>Student:</b> {{card.name}}</p>
+      <p><b>Subject:</b> {{card.subject}}</p>
+      <p><b>Decription:</b> {{card.description}}</p> 
+      <p><b>Food:</b> {{card.food}}</p>
+      <p><b>Location:</b> {{card.location}}</p> -->
+
+    <div class="col col-50">
+     <!--  <div class="row">
+        <span class="col col-75"> <span class="guide_info">Student</span> {{card.name}}</span> 
+      </div> -->
+        <div class="row">
+            <span class="col col-75"> <span class="guide_info">Subject: </span> <span class="imp_info">{{card.subject}}</span></span> 
+          </div>
+         <div class="row">
+            <span class="col col-75"> <span class="guide_info">Decription: </span> <span class="imp_info">{{card.description}}</span></span> 
+          </div>
+      <div class="row">
+            <span class="col col-75"> <span class="guide_info">Food: </span>  <span class="imp_info">{{card.food}}</span></span> 
+          </div>
+           <div class="row">
+            <span class="col col-75"> <span class="guide_info">Location: </span> <span class="imp_info">{{card.location}}</span> 
+          </div>
+    <!--   <div class="row">
+        <span class="col col-75">Food: {{card.food}}</span>
+      </div> -->
+    </div>
+    </div>
+
+    <!-- </p> -->
+    <super-navigate location="main#tutorProfile">
+      <button class ="button button-small button-balanced" ng-click="viewTutorProfile(card)">View Student Profile</button>
+    </super-navigate>
+    <!-- <super-navigate location="main#view_conversation"> -->
+      <button class ="button button-small button-calm" ng-click="sendMessage(card.userID)">Message Student</button>
+    <!-- </super-navigate> -->
+    <button class ="button button-small button-assertive" ng-click="cancelTutor(card)">Cancel Tutoring</button>
+  </div>  <!-- ng-show info-->
+  </li></h4>
+</ul>
+
+<hr style="border: 2px groove #939;">
+
+
+<h5> Hey {{ currentUser.firstname }}, these are your requests that haven't been accepted. Cancel if you've changed your mind</h5>
+<ul class = "list">
+<h4><li class = "item item-button-right" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: false}"><span class="imp_date">{{card.dateExp}}</span>
+  <!-- <p><button type = "button">Cancel</button></p> -->
+  <p align>
+    <input class="checkB"type ="checkbox" ng-model="show_detail">View Details
+  </p>
+  <div ng-show="show_detail">
+    <p>
+      <b>Student:</b> {{card.subject}} for {{card.food}}
+    </p>
+    <button class ="button button-small button-assertive" ng-click="removeRequest(card)">Cancel Tutoring</button>
+  </div>
+</li></h4>
+</ul>
+
+<hr style="border: 2px groove #939;">
+
+<h5> Hey {{ currentUser.firstname }}, these are appointments you attended. Rate your tutor!</h5>
+<ul class = "list">
+<h4><li class = "item" ng-repeat = "(key, card) in allRequests | filter: {userID : currentUser.$id, accepted: true, rated: false}">{{card.subject}}
+  <p>
+    <input class="checkB"type ="checkbox" ng-model="show_detail">Rate your Tutor 
+  </p>
+  <div ng-show="show_detail">
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          <b>Your Rating</b>
+        </div>
+        <select>
+          <option>1 (Not happy)</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5 (Extremely happy)</option>
+        </select>
+      </label>
+    </div>
+    <button class ="button button-small button-royal" ng-click="updateRating(card)">
+      Submit Rating
+    </button>
+  </div>
+</li></h4>
+</ul>
+
+
+
+</div>
+
+

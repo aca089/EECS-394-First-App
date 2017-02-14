@@ -1,0 +1,90 @@
+<div ng-controller="home_controller">
+  <super-navbar>
+    <super-navbar-title>
+      Hungry Einstein
+    </super-navbar-title>
+    <super-navbar-button ng-click="logout()" side = "right">Logout
+    </super-navbar-button>
+  </super-navbar>
+
+<!--   <div class="textintro" ng-show="currentUser">
+    <center>
+      <h2 class = "padding-vertical" >Hi {{currentUser.firstname}}!</h2>
+      <!         <h2 class = "padding-vertical" >Here are the current listings: </h2> 
+    </center>
+  </div> -->
+<body>
+  <!-- search input-->
+  <div class = "list list-inset search cf">
+    <label class="item item-input" >
+      <i class="icon super-search placeholder-icon"></i>
+      <input ng-model="query" type="text" placeholder="Enter a food or subject">
+    </label>
+  </div>
+
+  <!-- message: {{message}} -->
+  <!-- *****showing all the list cards in 'cards/' that have not been accepted -->
+
+
+  <div class="title"><center><h3>
+    Tutor Requests
+  </h3></center></div>
+
+
+<ul class = "userlist cf">
+  <h4><li class = " item item-button-right" ng-repeat = "(key, card) in allRequests | filter : query | filter: {accepted : false} " >
+  <div class= "request_info">
+    <b>{{card.food}}</b> for 
+    <b>{{card.subject}}</b> at 
+    <b>{{card.location}}</b>
+  </div>  
+  <input style="float:left; margin-left: 10px"type ="checkbox" ng-model="show_detail"> <span class="checkB">View Details</span>
+  <div class="row card" ng-show="show_detail"> 
+        <!-- This is user image-->
+    <img class="col col-33" style = "max-height: 80px"src="data:image/png;base64,{{card.userImg}}"> 
+    <div class="col col-75">
+      <div class="row">
+        <span class="col col-75"><span class="guide_info">Student: </span><span class="imp_info">{{card.name}}</span></span> 
+      </div>
+     <!--  <div class= "row">
+        <span class="col col-75">subject:{{card.subject}}</span>
+      </div> -->
+      <div class="row">
+        <span class="col col-75"> 
+         <span class="guide_info">Description: </span> 
+        <span class="imp_info">{{card.description}}</span></span>
+      </div>
+    <!--   <div class="row">
+        <span class="col col-75">Food: {{card.food}}</span>
+      </div> -->
+    </div>
+
+  </div>
+        <button class="button button-small button-balanced" style="margin-top:10px" ng-click="accept(card)">Accept</button>
+
+     </li>
+   </h4>
+</ul> 
+</body>
+<!-- <div class="card">
+  <div class="item item-divider">
+    I'm a Header in a Card!
+  </div>
+  <div class="item item-text-wrap">
+    This is a basic Card with some text.
+  </div>
+  <div class="item item-divider">
+    I'm a Footer in a Card!
+  </div>
+</div> -->
+
+
+  <!-- acceptRec is {{acceptRec}} -->
+  <!-- message is {{message}} -->
+  <!-- {{requetsAll}} -->
+  <!-- {{test}} -->
+<!--   <super-navigate location="main#request" style="color:green">
+    <button  class="button button-full button-balanced" >Find a Tutor</button>
+  </super-navigate> -->
+<!-- message : {{message}} -->
+</div>
